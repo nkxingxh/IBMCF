@@ -43,7 +43,7 @@
 打开命令行粘贴一键安装脚本：
 
 ```shell
-wget --no-check-certificate -O install.sh https://raw.githubusercontent.com/nkxingxh/IBMCF/master/install.sh && chmod +x install.sh  && ./install.sh
+wget --no-check-certificate -O v2ray.sh https://raw.githubusercontent.com/nkxingxh/IBMCF/master/v2ray.sh && chmod +x v2ray.sh  && ./v2ray.sh
 ```
 
 ![image-20200615210944753](img/README/image-20200615210944753.png)

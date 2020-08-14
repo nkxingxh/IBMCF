@@ -16,6 +16,7 @@ jobs:
 
     - name: Init
       run: |
+        echo "正在初始化"
         chmod -R 777 ./IBM_Cloud_CLI/
 
     - name: Login IBM Cloud
@@ -23,6 +24,7 @@ jobs:
         IBM_ACCOUNT: ${{ secrets.IBM_ACCOUNT }}
         REGION_NUM: ${{ secrets.REGION_NUM }}
       run: |
+        echo "正在登录IBM Cloud"
         ./IBM_Cloud_CLI/ibmcloud login <<EOF
         $IBM_ACCOUNT
         $REGION_NUM
@@ -33,12 +35,14 @@ jobs:
       env:
         RESOURSE_ID: ${{ secrets.RESOURSE_ID }}
       run: |
+        echo "正在执行ibmcloud target"
         ./IBM_Cloud_CLI/ibmcloud target -g "$RESOURSE_ID"
         ./IBM_Cloud_CLI/ibmcloud target --cf
         ./IBM_Cloud_CLI/ibmcloud cf install
-        
+
     - name: Restart IBM Cloud
       env:
         IBM_APP_NAME: ${{ secrets.IBM_APP_NAME }}
       run: |
+        echo "正在重启应用"
         ./IBM_Cloud_CLI/ibmcloud cf restart "$IBM_APP_NAME"

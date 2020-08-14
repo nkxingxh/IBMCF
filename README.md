@@ -1,4 +1,6 @@
-# IBMYes
+# IBMCF
+
+## V2Ray-CF
 
 本项目包括3部分
 
@@ -6,7 +8,7 @@
 2. 利用Github的Actions 每周重启 IBM Cloud Fonudray
 3. Cloudflare 高速节点中转
 
-# 使用IBM Cloud Fonudray搭建V2Ray
+### 使用IBM Cloud Fonudray搭建V2Ray
 
 首先注册https://cloud.ibm.com/
 
@@ -41,12 +43,12 @@
 打开命令行粘贴一键安装脚本：
 
 ```shell
-wget --no-check-certificate -O install.sh https://raw.githubusercontent.com/nkxingxh/IBMYes/master/install.sh && chmod +x install.sh  && ./install.sh
+wget --no-check-certificate -O install.sh https://raw.githubusercontent.com/nkxingxh/IBMCF/master/install.sh && chmod +x install.sh  && ./install.sh
 ```
 
 ![image-20200615210944753](img/README/image-20200615210944753.png)
 
-在配置的时候需要输入应用名称（这里就是我创建应用的时候输入应用名称我输入的是ibmyes，你需要改成你自己的名称）和应用内存大小（我们刚刚选择的是256）
+在配置的时候需要输入应用名称（这里就是我创建应用的时候输入应用名称我输入的是IBMCF，你需要改成你自己的名称）和应用内存大小（我们刚刚选择的是256）
 
 ![image-20200615211154143](img/README/image-20200615211154143.png)
 
@@ -66,21 +68,13 @@ wget --no-check-certificate -O install.sh https://raw.githubusercontent.com/nkxi
 
 这里请记下你的域名
 
-默认使用的配置是：
-
-```
-vmess://ew0KICAidiI6ICIyIiwNCiAgInBzIjogImlibXllcyIsDQogICJhZGQiOiAiaWJteWVzLnVzLXNvdXRoLmNmLmFwcGRvbWFpbi5jbG91ZCIsDQogICJwb3J0IjogIjQ0MyIsDQogICJpZCI6ICI4YzM1YmVmMy1kNTFmLTQxYWItYWM4Ny03YjA1MzQxMDQ5NWIiLA0KICAiYWlkIjogIjY0IiwNCiAgIm5ldCI6ICJ3cyIsDQogICJ0eXBlIjogIm5vbmUiLA0KICAiaG9zdCI6ICIiLA0KICAicGF0aCI6ICIiLA0KICAidGxzIjogInRscyINCn0=
-```
-
-把上面的配置复制到你的v2rayN或v2rayNg中，修改地址为你的应用的域名（前面我们`Bad Request`那个网页的域名。
-
 用户ID要改成刚才记录的UUID
 
 ![image-20200615212537944](img/README/image-20200615212537944.png)
 
-至此我们已经有一个可用的v2ray了，但是他每10天会重启一次，而且网速延迟很差，所以接下来会解决这个问题。
+至此我们已经有一个可用的v2ray了，但是他每10天不操作就会关机，而且网速延迟很差，所以接下来会解决这个问题。
 
-# 利用Github的Actions 每周重启 IBM Cloud Fonudray
+### 利用Github的Actions 每周重启 IBM Cloud Fonudray
 
 IBM Cloud 10天不操作就会关机，所以我们需要 十天内对其重启一次，避免关机。
 
@@ -139,7 +133,7 @@ ibmcloud resource groups
 现在返回github，到本项目
 
 ```
-https://github.com/CCChieh/IBMYes
+https://github.com/CCChieh/IBMCF
 ```
 
 ![image-20200615184239713](img/README/image-20200615184239713.png)
@@ -201,7 +195,7 @@ RESOURSE_ID // 资源组ID
 
 > 感谢药油@[My Flavor](https://yaohuo.me/bbs/userinfo.aspx?touserid=24109)，原本打算弄bash在自己服务器定期执行脚本，现在看了他的帖子，发现用Actions是一个更好的选择。
 
-# Cloudflare 高速节点中转
+### Cloudflare 高速节点中转
 
 > 此部分贡献来自药油@[Joyace](https://yaohuo.me/bbs/userinfo.aspx?touserid=5461)、@[老婆](https://yaohuo.me/bbs/userinfo.aspx?touserid=21843)以及@[小俊博客](https://www.xjisme.com/)
 
@@ -223,7 +217,7 @@ cloudflare官网：https://www.cloudflare.com/
 addEventListener(
 "fetch",event => {
 let url=new URL(event.request.url);
-url.hostname="ibmyes.us-south.cf.appdomain.cloud";
+url.hostname="ibmcf.us-south.cf.appdomain.cloud";
 let request=new Request(url,event.request);
 event. respondWith(
 fetch(request)
@@ -249,23 +243,3 @@ fetch(request)
 ![image-20200615215120033](img/README/image-20200615215120033.png)
 
 现在已经使用了cloudflare的代理。
-
-下面我们将筛选cloudflare的高速节点。
-
-克隆本项目到你的电脑上。
-
-打开项目下的`fping-msys2.0`目录运行`自动查找最优CF节点-懒人专用.bat`
-
-![image-20200615215435278](img/README/image-20200615215435278.png)
-
-这里假设我获取的最优ip是`104.17.188.91`
-
-在客户端把地址换成ip，伪装域名换成我们cloudflare的workers的域名即可
-
-![image-20200615215820188](img/README/image-20200615215820188.png)
-
-如果不方便用电脑优选ip也可以把地址设为`cloudflare.com`或`icook.tw`,这两个一个cloudflare官网，自然也是使用自家cdn，另外一家是台湾省的一个网站，域名指向的ip一般也是比较好的线路。
-
-![image-20200615220201165](img/README/image-20200615220201165.png)
-
-这里稍微提下原理吧，主要涉及CDN和请求头部，CDN识别流量是访问哪个网站的是根据请求头的Host来识别，所以这里要么host用我们的域名 ，要么我们伪装成我们的域名，这样都可以达到回源我们网站的请求。如果自己有域名也可以换自己的域名，域名也可以从第三方接入商cname，有兴趣的同学可以自己研究下。

@@ -30,7 +30,7 @@ create_mainfest_file(){
     echo "V2Ray UUID：${UUID}"
 
     read -p "请输入path(不带'/'，默认v2ray): " V2RAYPATH
-    if [ -z "$V2RAYPATH" ];then
+    if [ -z "${V2RAYPATH}" ];then
 	V2RAYPATH="v2ray"
     fi
     echo "V2Ray path：$V2RAYPATH"

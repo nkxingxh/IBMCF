@@ -1,1 +1,1 @@
-web: ./cloudreve/start.sh
+web: ./cloudreve/cloudreve

@@ -7,7 +7,7 @@ clone_repo(){
     git clone https://github.com/nkxingxh/IBMCF
     cd IBMCF
     git submodule update --init --recursive
-    cd v2ray-cf/v2ray
+    cd v2ray-cf/vserv
     chmod +x *
     cd ${SH_PATH}/IBMCF/v2ray-cf
     echo "初始化完成"
@@ -49,8 +49,8 @@ EOF
 install(){
     echo "Step 3: 安装应用"
     cd ${SH_PATH}/IBMCF/v2ray-cf
-    sed -i "s/id\": .*\"/id\": \"$UUID\"/g" ./v2ray/config.json
-    sed -i "s/v2raypathvalue/$V2RAYPATH/g" ./v2ray/config.json
+    sed -i "s/id\": .*\"/id\": \"$UUID\"/g" ./vserv/config.json
+    sed -i "s/v2raypathvalue/$V2RAYPATH/g" ./vserv/config.json
     ibmcloud target --cf
     #ibmcloud cf install
     ibmcloud cf push
